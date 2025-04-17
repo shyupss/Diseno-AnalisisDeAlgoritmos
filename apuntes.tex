@@ -1,0 +1,173 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}   % para tildes
+\usepackage[spanish]{babel}   % español
+\usepackage{color}            % colores para código
+\usepackage{xcolor}           % colores en general
+\definecolor{blueShyupss}{RGB}{0,0,128}
+\usepackage[colorlinks=true, linkcolor=blueShyupss, urlcolor=gray, citecolor=orange]{hyperref} % para links (están con colores personalizados)
+\usepackage{amsmath, amssymb} % símbolos y matemáticas
+\usepackage{graphicx}         % imágenes
+\usepackage{listings}         % código fuente
+\usepackage{fancyhdr}         % encabezado/pie de página
+\usepackage{geometry}         % márgenes
+\usepackage{parskip}          % para los saltos
+
+% definiciones para las llamadas a definiciones y teoremas
+\newtheorem{teorema}{Teorema}
+\newtheorem{definicion}{Definición}
+
+% Para el texto de "Ejemplo:"
+\newcommand{\ejemplo}{\vspace{1.1em}\textbf{\vspace{0.2em}\textit{Ejemplo:}} } 
+
+% definicion para los "enunciados"
+\newcommand{\enunciado}[1]{
+  \vspace{1em} % Añade un pequeño espacio antes
+  \noindent \textbf{\large #1} % Usamos \Large para el tamaño
+  \vspace{1em} % Añade un pequeño espacio después
+}
+
+% definicion para los desarrollos
+\newcommand{\desarrollo}[1]{
+  \vspace{1em} % Añade un pequeño espacio antes
+  \noindent \text{\large \sloppy \parbox{\textwidth}{#1}} % Ajusta el texto automáticamente con salto de línea
+  \vspace{1em} % Añade un pequeño espacio después
+}
+
+\geometry{margin=2cm}
+
+% inicio del documento
+\begin{document}
+
+\title{Teoría de Automatas}
+\author{Diego Soto - Universidad Austral De Chile}
+\date{\today}
+\maketitle
+
+\newpage %índice automático en nueva página
+\tableofcontents
+\newpage
+
+% aquí comienza el contenido del shyupss, ordenado por secciones
+\section{Introducción}
+
+\section{Análizis de algoritmos}
+\section{Análizis Asintótico}
+\section{Cotas Inferiores}
+\section{Recurrencias}
+\section{Teorema Maestro}
+\section{Divide y Vencerás}
+
+\newpage
+\section{Resumen Materia}
+
+\begin{itemize}
+  \item Teorema Maestro
+  
+  Para las ecuaciones de la forma: $T(n) = a T(\frac{n}{b}) + f(n)$; $a\geqslant 1$, $b>1$ se tienen dos tipos de casos.
+  \begin{center}
+    \underline{Caso Simple}
+    
+    \begin{enumerate}
+      \item $a<b \Rightarrow T(n) = O(n)$
+      \item $a=b \Rightarrow T(n) = O(n\log n)$
+      \item $a>b \Rightarrow T(n) = O(n^{\log _b a})$
+    \end{enumerate}
+    \vspace{0.5em}
+    \underline{Caso General (T.M) - Cuando f(n) es de la forma $O(n^x\log^yn)$}
+    
+    (Nota: $x, y$ pueden ser $0$)
+  \end{center}
+  Para aplicar el caso general del Teorema Maestro, se suele usar el "Truco del Pivote" (Usado para saltar al caso correcto del teorema general)
+  \vspace{0.7em}
+  
+  El truco del Pivote conciste en dar un pivote, el cual denotaremos por $P$, donde estará definido por:
+  \begin{center} 
+    $P = n^{\log_b a}$  
+  \end{center}
+  
+  Entonces, con el pivote dado, análizamos:
+  \begin{itemize}
+    \item Si es menor que $f$, entonces usamos $Caso 3$
+    \item Si es igual que $f$, entonces usamos $Caso 2$
+    \item Si es mayor que $f$, entonces usamos $Caso 1$
+  \end{itemize}
+
+  Donde $Caso 1$, $Caso 2$, y $Caso 3$ están definidos por:
+  \vspace{1em}
+  
+  \begin{center}
+    \underline{Caso 1}
+    
+    $f(n) = O(n^{(\log _b a) - \epsilon})$
+    
+    $T(n) = \varTheta (n^{\log _b a})$
+    
+    \fbox{\hspace{0.2em}$\epsilon > 0$\hspace{0.2em}}
+  \end{center}
+  \vspace{1em}
+  \begin{center}
+    \underline{Caso 2}
+    
+    $f(n) = \varTheta (n^{\log _b a} \log ^k n)$
+    
+    $T(n) = \varTheta (n^{\log _b a} \log ^{k+1} n)$
+    
+    \fbox{\hspace{0.2em}$k \geqslant  0$\hspace{0.2em}}
+  \end{center}
+  \newpage
+  \begin{center}
+    \underline{Caso 3}
+    
+    $f(n) = \varOmega  (n^{(\log _b a) + \epsilon})$
+    
+    $a \cdot f(\frac{n}{b}) \leqslant  c \cdot f(n)$
+    
+    $T(n) = \varTheta (f(n))$
+
+    \fbox{\hspace{0.2em}$\epsilon > 0$; $c < 1$\hspace{0.2em}}
+  \end{center}
+  
+\end{itemize}
+\newpage
+
+\section{Ayudantía 1}
+\section{Ayudantía 2}
+\section{Ayudantía 3}
+
+\begin{itemize}
+  \item 1.- Determine si $2^{n}$ es $\Omega$ o $\Theta$ de $8^{\frac{n}{4}}n^3$
+  \vspace{1em}
+  
+  \begin{center}
+    Digamos que $f(n) = 2^n$ y $g(n) = 8^{\frac{n}{4}}n^3$
+    \vspace{0.5em}
+    
+    Entonces, usaremos $\lim_{n\to\infty}\frac{f(n)}{g(n)}$ para determinar si $f(n)$ es $o(g(n))$, $\omega(g(n))$, o $\varTheta(g(n))$
+    \vspace{1em}
+  \end{center}
+  
+  \item 2.- Determine si $\sum_{i = 1}^{n}i^3$ es $\Omega$, $\Theta$ o $\Omega$ de $n\log^3(n)$
+  \vspace{1em}
+  \item 3.- Resolver la recurrencia denotada por: $T(n) = 2T(\frac{n}{2})+3n+2$
+\end{itemize}
+
+\section{Ayudantía 4}
+
+\begin{itemize}
+  \item 
+\end{itemize}
+
+\section{Entropía}
+
+La Entropía es un concepto utilizado en la teoría de la información:
+
+\begin{itemize}
+  \item En "Data compression" se usa la entropía para determinar la complejidad de comprimir un "stream".
+  \item La Entropía de un objeto $\chi $ es, la mínima cantidad de bits requeridos para representar univocamente a $\chi $ desde un conjunto.
+  \item Entonces, la entropía es usada como una \underline{cota inferior} al espacio usado para cualquier representación comprimida de un objeto.
+\end{itemize}
+
+\section{Programación Dinámica}
+
+
+\end{document}
