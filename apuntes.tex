@@ -3,6 +3,7 @@
 \usepackage[spanish]{babel}   % español
 \usepackage{color}            % colores para código
 \usepackage{xcolor}           % colores en general
+\usepackage[most]{tcolorbox}
 \definecolor{blueShyupss}{RGB}{0,0,128}
 \usepackage[colorlinks=true, linkcolor=blueShyupss, urlcolor=gray, citecolor=orange]{hyperref} % para links (están con colores personalizados)
 \usepackage{amsmath, amssymb} % símbolos y matemáticas
@@ -12,26 +13,49 @@
 \usepackage{geometry}         % márgenes
 \usepackage{parskip}          % para los saltos
 
-% definiciones para las llamadas a definiciones y teoremas
+% Definimos un color oscuro para fondo
+\definecolor{darkbg}{RGB}{30,30,30}
+\definecolor{white}{RGB}{255,255,255}
+
+% Estilo personalizado para código
+\lstdefinestyle{custom}{
+  language=Python,
+  basicstyle=\ttfamily\color{white}\small,
+  keywordstyle=\color{cyan},
+  commentstyle=\color{gray}\itshape,
+  stringstyle=\color{orange},
+  backgroundcolor=\color{darkbg},
+  numbers=left,
+  numberstyle=\tiny\color{white},
+  numbersep=10pt,
+  tabsize=2,
+  breaklines=true,
+  showstringspaces=false
+}
+
+% Caja con fondo oscuro y bordes redondeados
+\newtcolorbox{codeblock}{
+  listing only,
+  listing options={style=custom},
+  colback=darkbg,
+  colframe=gray!60,
+  arc=6pt,
+  boxrule=0.6pt,
+  left=6pt,
+  right=6pt,
+  top=6pt,
+  bottom=6pt
+}
+
+% definiciones para las llamadas a definiciones y teoremas"
 \newtheorem{teorema}{Teorema}
 \newtheorem{definicion}{Definición}
+\newtheorem{lema}{Lema}
+\newtheorem{demostracion}{Dem. }
 
 % Para el texto de "Ejemplo:"
 \newcommand{\ejemplo}{\vspace{1.1em}\textbf{\vspace{0.2em}\textit{Ejemplo:}} } 
-
-% definicion para los "enunciados"
-\newcommand{\enunciado}[1]{
-  \vspace{1em} % Añade un pequeño espacio antes
-  \noindent \textbf{\large #1} % Usamos \Large para el tamaño
-  \vspace{1em} % Añade un pequeño espacio después
-}
-
-% definicion para los desarrollos
-\newcommand{\desarrollo}[1]{
-  \vspace{1em} % Añade un pequeño espacio antes
-  \noindent \text{\large \sloppy \parbox{\textwidth}{#1}} % Ajusta el texto automáticamente con salto de línea
-  \vspace{1em} % Añade un pequeño espacio después
-}
+\newcommand{\ejercicio}{\vspace{1.1em}\textbf{\vspace{0.2em}\textit{Ejercicio:}} } 
 
 \geometry{margin=2cm}
 
@@ -167,7 +191,33 @@ La Entropía es un concepto utilizado en la teoría de la información:
   \item Entonces, la entropía es usada como una \underline{cota inferior} al espacio usado para cualquier representación comprimida de un objeto.
 \end{itemize}
 
+\begin{ejercicio}
+  Para 'ABAAAAACCABCABACD' haga lo siguiente:
+
+  \begin{enumerate}
+    \item Calcular la entropía de Shannon-Fano
+    \item Tabla de Shannon
+    \item Árbol de Freeman
+    \item Codificar la mitad con ambos
+  \end{enumerate}
+\end{ejercicio}
+
+\newpage
+
 \section{Programación Dinámica}
 
+\begin{ejercicio}
+  Hay una rana que quiere llegar al último eslabón de una escalera, para llegar hasta arriba necesita llegar saltando. El largo de los saltos que puede hacer está contenido dentro del conjunto $B = \{a, b, \dots, z\}$, $\left\lvert B \right\rvert = k$, y el largo de la escalera es de $N$. ¿De cuantas formas distinta usando los saltos posibles se puede llegar al último eslabon de la escalera?
+\end{ejercicio}
+
+\begin{itemize}
+  \item Primero mostraremos un pseudocódigo a fuerza bruta que resuelve el problema de forma recursiva:
+  
+  \begin{codeblock}
+    asdads
+    
+  \end{codeblock}
+
+\end{itemize}
 
 \end{document}
